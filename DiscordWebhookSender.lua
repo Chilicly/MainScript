@@ -4,7 +4,7 @@
 local Config = getgenv().WebhookConfig or {}
 
 local webhookURL   = Config.URL or ""                  -- Webhook 地址
-local username     = Config.Username or "Discord Webhook Sender"     -- 发送者名字
+local username     = Config.Username or "Webhook Sender"     -- 发送者名字
 local avatar       = Config.Avatar or ""               -- 发送者头像
 local content      = Config.Content or ""              -- 普通文字内容（可@人）
 local title        = Config.Title or ""        -- 标题
