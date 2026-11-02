@@ -4,15 +4,21 @@
 local Config = getgenv().WebhookConfig or {}
 
 local webhookURL   = Config.URL or ""                  -- Webhook 地址
-local username     = Config.Username or "Webhook Sender"     -- 发送者名字
 local avatar       = Config.Avatar or ""               -- 发送者头像
 local content      = Config.Content or ""              -- 普通文字内容（可@人）
 local title        = Config.Title or ""        -- 标题
 local description  = Config.Description or ""  -- 描述内容
 local color        = Config.Color or 5814783           -- 颜色
 local footerText   = Config.Footer or ""       -- 页脚文字
+
+-- 用户名：没填或空字符串时使用默认名字
+local username = Config.Username
+if username == nil or username == "" then
+    username = "Webhook Sender"
+end
+
 local showTimestamp = Config.Timestamp                 -- 是否显示时间戳
-if showTimestamp == nil then showTimestamp = true end  -- 默认显示
+if showTimestamp == nil then showTimestamp = false end  -- 默认不显示
 local times        = Config.Times or 1                 -- 发送次数（0 = 无限）
 local delayTime    = Config.Delay or 3                 -- 每次发送间隔（秒）
 
@@ -71,7 +77,7 @@ local function SendWebhook()
         if response and (response.StatusCode == 200 or response.StatusCode == 204) then
             print("Webhook 发送成功")
         else
-            warn("发送失败")
+            warn("Webhook 发送失败")
         end
     else
         warn("当前执行器不支持 HTTP 请求")
